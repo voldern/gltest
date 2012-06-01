@@ -16,7 +16,7 @@ namespace Engine {
     GLuint program = glCreateProgram();
     for (std::vector<Shader*>::iterator shader = this->shaders.begin();
          shader != this->shaders.end();
-         shader++) {
+         ++shader) {
       glAttachShader(program, (*shader)->getShader());
     }
 
