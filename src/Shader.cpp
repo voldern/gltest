@@ -52,7 +52,7 @@ namespace Engine {
     return this->shader;
   }
 
-  std::string Shader::getShaderSource() {
+  std::string Shader::getSource() {
     return this->shaderSource;
   }
 

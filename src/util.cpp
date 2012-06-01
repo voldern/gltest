@@ -9,24 +9,21 @@
 
 #include "util.hpp"
 #include "Shader.hpp"
+#include "Program.hpp"
 
 
 GLuint createProgram(const char *vShaderPath, const char *fShaderPath) {
-  Engine::Shader vShader(vShaderPath, Engine::Shader::Vertex);
-  Engine::Shader fShader(fShaderPath, Engine::Shader::Fragment);
+  Engine::Shader* vShader = new Engine::Shader(vShaderPath, Engine::Shader::Vertex);
+  Engine::Shader* fShader = new Engine::Shader(fShaderPath, Engine::Shader::Fragment);
 
   // This can throw an exception
-  vShader.compileShader();
-  fShader.compileShader();
-  
-  GLuint shaderProgram = glCreateProgram();
-  glAttachShader(shaderProgram, vShader.getShader());
-  glAttachShader(shaderProgram, fShader.getShader());
-  
-  glBindFragDataLocation(shaderProgram, 0, "outColor");
-    
-  glLinkProgram(shaderProgram);
+  vShader->compileShader();
+  fShader->compileShader();
 
-  return shaderProgram;
+  Engine::Program shaderProgram;
+  shaderProgram.attachShader(vShader);
+  shaderProgram.attachShader(fShader);
+
+  return shaderProgram.getLinkedProgram();
 }
 

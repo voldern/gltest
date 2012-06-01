@@ -27,7 +27,7 @@ namespace Engine {
     Shader(std::string filename, Type shaderType);
     bool compileShader();
     GLuint getShader();
-    std::string getShaderSource();
+    std::string getSource();
   };
 }
 
