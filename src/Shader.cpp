@@ -1,8 +1,4 @@
-#include "shader.hpp"
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
+#include "Shader.hpp"
 
 namespace Engine {
   Shader::Shader(std::string filename, Shader::Type shaderType) {

@@ -2,6 +2,10 @@
 #define __ENGINE_SHADER_HPP__
 
 #include <string>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
 #include <GL/glew.h>
 #include <GL/glfw.h>
 
