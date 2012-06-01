@@ -9,18 +9,18 @@
 #include "Engine/Shader.hpp"
 
 namespace Engine {
-  class Program {
-  private:
-    std::vector<Shader*> shaders;
+    class Program {
+    private:
+        std::vector<Shader*> shaders;
 
-  public:
-    Program();
-    ~Program();
+    public:
+        Program();
+        ~Program();
 
-    void attachShader(Shader* shader);
+        void attachShader(Shader* shader);
     
-    GLuint getLinkedProgram();
-  };
+        GLuint getLinkedProgram();
+    };
 }
 
 #endif

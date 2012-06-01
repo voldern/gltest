@@ -10,25 +10,25 @@
 #include <GL/glfw.h>
 
 namespace Engine {
-  class Shader {
-  private:
-    std::string filename;
-    std::string shaderSource;
-    GLuint shader;
+    class Shader {
+    private:
+        std::string filename;
+        std::string shaderSource;
+        GLuint shader;
     
-    std::string loadShaderFile();
+        std::string loadShaderFile();
 
-  public:
-    enum Type {
-      Vertex,
-      Fragment
-    } shaderType;
+    public:
+        enum Type {
+            Vertex,
+            Fragment
+        } shaderType;
     
-    Shader(std::string filename, Type shaderType);
-    bool compileShader();
-    GLuint getShader();
-    std::string getSource();
-  };
+        Shader(std::string filename, Type shaderType);
+        bool compileShader();
+        GLuint getShader();
+        std::string getSource();
+    };
 }
 
 #endif

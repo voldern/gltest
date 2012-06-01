@@ -13,17 +13,17 @@
 
 
 GLuint createProgram(const char *vShaderPath, const char *fShaderPath) {
-  Engine::Shader* vShader = new Engine::Shader(vShaderPath, Engine::Shader::Vertex);
-  Engine::Shader* fShader = new Engine::Shader(fShaderPath, Engine::Shader::Fragment);
+    Engine::Shader* vShader = new Engine::Shader(vShaderPath, Engine::Shader::Vertex);
+    Engine::Shader* fShader = new Engine::Shader(fShaderPath, Engine::Shader::Fragment);
 
-  // This can throw an exception
-  vShader->compileShader();
-  fShader->compileShader();
+    // This can throw an exception
+    vShader->compileShader();
+    fShader->compileShader();
 
-  Engine::Program shaderProgram;
-  shaderProgram.attachShader(vShader);
-  shaderProgram.attachShader(fShader);
+    Engine::Program shaderProgram;
+    shaderProgram.attachShader(vShader);
+    shaderProgram.attachShader(fShader);
 
-  return shaderProgram.getLinkedProgram();
+    return shaderProgram.getLinkedProgram();
 }
 
