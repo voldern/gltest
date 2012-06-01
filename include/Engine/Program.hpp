@@ -6,7 +6,7 @@
 #include <GL/glew.h>
 #include <GL/glfw.h>
 
-#include "Shader.hpp"
+#include "Engine/Shader.hpp"
 
 namespace Engine {
   class Program {

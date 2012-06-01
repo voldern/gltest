@@ -8,8 +8,8 @@
 #include <GL/glfw.h>
 
 #include "util.hpp"
-#include "Shader.hpp"
-#include "Program.hpp"
+#include "Engine/Shader.hpp"
+#include "Engine/Program.hpp"
 
 
 GLuint createProgram(const char *vShaderPath, const char *fShaderPath) {
