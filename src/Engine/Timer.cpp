@@ -17,7 +17,16 @@ namespace Engine {
     timespec time;
     clock_gettime(CLOCK_REALTIME, &time);
     
-    return (long)(time.tv_nsec - this->ts.tv_nsec);
+    timespec diff;
+    if ((time.tv_nsec - this->ts.tv_nsec) < 0) {
+      diff.tv_sec = time.tv_sec - this->ts.tv_sec-1;
+      diff.tv_nsec = 1000000000 + time.tv_nsec - this->ts.tv_nsec;
+    } else {
+      diff.tv_sec = time.tv_sec - this->ts.tv_sec;
+      diff.tv_nsec = time.tv_nsec - this->ts.tv_nsec;
+    }
+    
+    return diff.tv_nsec;
   }
 
   unsigned int Timer::getLapsedSec() {

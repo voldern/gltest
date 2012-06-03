@@ -3,6 +3,8 @@
 
 #include <GL/glew.h>
 #include <GL/glfw.h>
+#include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
 
 #include "Engine/Scene.hpp"
 #include "util.hpp"
@@ -18,6 +20,9 @@ public:
 
 private:
   GLuint shaderProgram;
+  glm::mat4 Model;
+  glm::mat4 View;
+  glm::mat4 Projection;
   
 };
 

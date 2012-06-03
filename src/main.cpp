@@ -30,11 +30,16 @@ int main() {
     glGetError();
 
     Engine::Timer timer;
-    IntroScene introScene(timer, 0, 3);
-    introScene.init();
+    IntroScene introScene(timer, 0, 8);
+
+    try {
+      introScene.init();
+    } catch (std::string ex) {
+      std::cout << ex << std::endl;
+    }
     
     while(glfwGetWindowParam(GLFW_OPENED)) {
-        if ( glfwGetKey( GLFW_KEY_ESC ) == GLFW_PRESS ) {
+        if (glfwGetKey(GLFW_KEY_ESC) == GLFW_PRESS) {
             break;
         }
 
@@ -44,11 +49,10 @@ int main() {
         unsigned int lapsedSec = timer.getLapsedSec();
         if (lapsedSec >= introScene.getStartTime() &&
             lapsedSec < introScene.getStopTime()) {
-          
-          std::cout << "Lapsed: " << timer.getLapsedSec() << std::endl;
-          
           introScene.update();
           introScene.draw();
+        } else {
+          std::cout << "No more scenes to render" << std::endl;
         }
     
         glfwSwapBuffers();
