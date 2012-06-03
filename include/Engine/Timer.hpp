@@ -1,7 +1,7 @@
 #ifndef __ENGINE_TIMER_HPP__
 #define __ENGINE_TIMER_HPP__
 
-#include <time.h>
+#include <sys/time.h>
 
 namespace Engine {
     class Timer {
@@ -14,7 +14,7 @@ namespace Engine {
       unsigned int getLapsedSec();
 
     private:
-      timespec ts;
+      timeval time;
     };
 }
 

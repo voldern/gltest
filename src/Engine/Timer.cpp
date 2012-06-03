@@ -2,7 +2,8 @@
 
 namespace Engine {
   Timer::Timer() {
-    clock_gettime(CLOCK_REALTIME, &ts);
+    gettimeofday(&this->time, NULL);
+    //clock_gettime(CLOCK_REALTIME, &ts);
   }
 
   Timer::~Timer() {
@@ -10,30 +11,27 @@ namespace Engine {
   }
 
   void Timer::reset() {
-    clock_gettime(CLOCK_REALTIME, &ts);
+    gettimeofday(&this->time, NULL);
+    //clock_gettime(CLOCK_REALTIME, &ts);
   }
 
   long Timer::getLapsed() {
-    timespec time;
-    clock_gettime(CLOCK_REALTIME, &time);
-    
-    timespec diff;
-    if ((time.tv_nsec - this->ts.tv_nsec) < 0) {
-      diff.tv_sec = time.tv_sec - this->ts.tv_sec-1;
-      diff.tv_nsec = 1000000000 + time.tv_nsec - this->ts.tv_nsec;
-    } else {
-      diff.tv_sec = time.tv_sec - this->ts.tv_sec;
-      diff.tv_nsec = time.tv_nsec - this->ts.tv_nsec;
-    }
-    
-    return diff.tv_nsec;
+    //timespec time;
+    //clock_gettime(CLOCK_REALTIME, &time);
+    timeval newTime;
+    gettimeofday(&newTime, NULL);
+
+    return (long)((long)(newTime.tv_sec * 1000) + (long)(newTime.tv_usec / 1000)) -
+               (long)((long)(this->time.tv_sec * 1000) + (long)(this->time.tv_usec / 1000));
   }
 
   unsigned int Timer::getLapsedSec() {
-    timespec time;
-    clock_gettime(CLOCK_REALTIME, &time);
-    
-    return (long)(time.tv_sec - this->ts.tv_sec);
+    //timespec time;
+    //clock_gettime(CLOCK_REALTIME, &time);
+    timeval newTime;
+    gettimeofday(&newTime, NULL);
+
+    return (long)(newTime.tv_sec - this->time.tv_sec);
   }
-  
+
 }

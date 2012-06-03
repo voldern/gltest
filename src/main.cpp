@@ -13,7 +13,7 @@ int main() {
     glfwOpenWindowHint( GLFW_OPENGL_VERSION_MAJOR, 3 );
     glfwOpenWindowHint( GLFW_OPENGL_VERSION_MINOR, 2 );
     glfwOpenWindowHint( GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE );
-    
+
     glfwOpenWindowHint( GLFW_WINDOW_NO_RESIZE, GL_TRUE );
     glfwOpenWindow( 800, 600, 0, 0, 0, 0, 0, 0, GLFW_WINDOW );
 
@@ -37,7 +37,7 @@ int main() {
     } catch (std::string ex) {
       std::cout << ex << std::endl;
     }
-    
+
     while(glfwGetWindowParam(GLFW_OPENED)) {
         if (glfwGetKey(GLFW_KEY_ESC) == GLFW_PRESS) {
             break;
@@ -54,11 +54,11 @@ int main() {
         } else {
           std::cout << "No more scenes to render" << std::endl;
         }
-    
+
         glfwSwapBuffers();
     }
-  
+
     glfwTerminate();
-  
+
     return 0;
 }
