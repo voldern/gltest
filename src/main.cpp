@@ -45,7 +45,7 @@ int main() {
         if (lapsedSec >= introScene.getStartTime() &&
             lapsedSec < introScene.getStopTime()) {
           
-          std::cout << "Lapsed: " << timer.getLapsedSec() << std::endl;
+          std::cout << "Lapsed: " << timer.getLapsed() << std::endl;
           
           introScene.update();
           introScene.draw();
