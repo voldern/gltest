@@ -4,12 +4,8 @@
 
 #include "main.hpp"
 #include "util.hpp"
-
-float vertices[] = {
-    0.0f,  0.5f, // Vertex 1 (X, Y)
-    0.5f, -0.5f, // Vertex 2 (X, Y)
-    -0.5f, -0.5f  // Vertex 3 (X, Y)
-};
+#include "Engine/Scene.hpp"
+#include "IntroScene.hpp"
 
 int main() {
     glfwInit();
@@ -33,34 +29,27 @@ int main() {
     // so we need to clear that here.
     glGetError();
 
-    GLuint vbo;
-    glGenBuffers(1, &vbo); // Generate 1 buffer
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);   
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) * sizeof(float),
-                 vertices, GL_STATIC_DRAW);
-
-    GLuint shaderProgram;
-    try {
-        shaderProgram = createProgram("./shaders/vertex.glsl",
-                                      "./shaders/fragment.glsl");
-    } catch (std::string ex) {
-        std::cout << ex << std::endl;
-        return 1;
-    }
-
-    glUseProgram(shaderProgram);
-
-    GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
-    glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 0, 0);
+    Engine::Timer timer;
+    IntroScene introScene(timer, 0, 3);
+    introScene.init();
     
-    glEnableVertexAttribArray(posAttrib);
-
     while(glfwGetWindowParam(GLFW_OPENED)) {
         if ( glfwGetKey( GLFW_KEY_ESC ) == GLFW_PRESS ) {
             break;
         }
 
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        unsigned int lapsedSec = timer.getLapsedSec();
+        if (lapsedSec >= introScene.getStartTime() &&
+            lapsedSec < introScene.getStopTime()) {
+          
+          std::cout << "Lapsed: " << timer.getLapsedSec() << std::endl;
+          
+          introScene.update();
+          introScene.draw();
+        }
     
         glfwSwapBuffers();
     }

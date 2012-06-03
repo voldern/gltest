@@ -1,10 +1,10 @@
 .cpp.o:
 	g++ -Wall -g -c -I./include/ -o $@ $<
 
-play: src/main.o src/util.o libengine.a
-	g++ -Wall -g -o play $^ -lGL -lGLEW -lglfw
+play: src/main.o src/util.o src/IntroScene.o libengine.a
+	g++ -Wall -g -o play $^ -lGL -lGLEW -lglfw -lrt
 
-libengine.a: src/Engine/Shader.o src/Engine/Program.o 
+libengine.a: src/Engine/Shader.o src/Engine/Program.o src/Engine/Timer.o src/Engine/Scene.o
 	$(AR) -csr $@ $^
 
 clean:
