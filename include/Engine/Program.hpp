@@ -11,15 +11,21 @@
 namespace Engine {
     class Program {
     private:
-        std::vector<Shader*> shaders;
+        GLuint program;
+        Shader* fragmentShader;
+        Shader* vertexShader;
 
     public:
         Program();
         ~Program();
 
-        void attachShader(Shader* shader);
+        void attachVertexShader(Shader* shader);
+        void attachFragmentShader(Shader* shader);
+        bool link();
     
-        GLuint getLinkedProgram();
+        GLuint getProgram();
+        Shader* getVertexShader();
+        Shader* getFragmentShader();
     };
 }
 

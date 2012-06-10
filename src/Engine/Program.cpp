@@ -2,28 +2,48 @@
 
 namespace Engine {
     Program::Program() {
+        this->program = glCreateProgram();
     }
 
     Program::~Program() {
     
     }
 
-    void Program::attachShader(Shader* shader) {
-        this->shaders.push_back(shader);
+    // TODO: Should it be possible to overwrite the shader?
+    void Program::attachVertexShader(Shader* shader) {
+        this->vertexShader = shader;
     }
-  
-    GLuint Program::getLinkedProgram() {
-        GLuint program = glCreateProgram();
-        for (std::vector<Shader*>::iterator shader = this->shaders.begin();
-             shader != this->shaders.end();
-             ++shader) {
-            glAttachShader(program, (*shader)->getShader());
+
+    // TODO: Should it be possible to overwrite the shader?
+    void Program::attachFragmentShader(Shader* shader) {
+        this->fragmentShader = shader;
+    }
+
+    // TODO: Error handling
+    bool Program::link() {
+        if (this->vertexShader == NULL || this->fragmentShader == NULL) {
+            // Throw error
         }
 
-        glBindFragDataLocation(program, 0, "outColor");
+        glAttachShader(this->program, this->fragmentShader->getShader());
+        glAttachShader(this->program, this->vertexShader->getShader());
+        
+        glBindFragDataLocation(this->program, 0, "outColor");
     
-        glLinkProgram(program);
-    
-        return program;
+        glLinkProgram(this->program);
+
+        return true;
+    }
+  
+    GLuint Program::getProgram() {
+        return this->program;
+    }
+
+    Shader* Program::getVertexShader() {
+        return this->vertexShader;
+    }
+
+    Shader* Program::getFragmentShader() {
+        return this->fragmentShader;
     }
 }

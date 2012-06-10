@@ -1,5 +1,5 @@
 INCLUDES = -I./include/ 
-LIBS = -lGL -lGLEW -lglfw
+LIBS = -lGL -lGLEW -lglfw -lpugixml -lassimp
 LIBS_DIR = 
 
 ifdef OSX
@@ -14,7 +14,7 @@ endif
 play: src/main.o src/util.o src/IntroScene.o libengine.a
 	g++ -Wall -g -o play $^ $(LIBS_DIR) $(LIBS)
 
-libengine.a: src/Engine/Shader.o src/Engine/Program.o src/Engine/Timer.o src/Engine/Scene.o
+libengine.a: src/Engine/Shader.o src/Engine/Program.o src/Engine/Timer.o src/Engine/Scene.o src/Engine/Collada.o
 	$(AR) -csr $@ $^
 
 clean:

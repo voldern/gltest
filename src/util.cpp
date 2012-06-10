@@ -21,9 +21,10 @@ GLuint createProgram(const char *vShaderPath, const char *fShaderPath) {
     fShader->compileShader();
 
     Engine::Program shaderProgram;
-    shaderProgram.attachShader(vShader);
-    shaderProgram.attachShader(fShader);
-
-    return shaderProgram.getLinkedProgram();
+    shaderProgram.attachVertexShader(vShader);
+    shaderProgram.attachFragmentShader(fShader);
+    shaderProgram.link();
+    
+    return shaderProgram.getProgram();
 }
 

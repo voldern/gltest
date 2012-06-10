@@ -5,6 +5,7 @@
 #include "main.hpp"
 #include "util.hpp"
 #include "Engine/Scene.hpp"
+#include "Engine/Collada.hpp"
 #include "IntroScene.hpp"
 
 int main() {
@@ -15,7 +16,7 @@ int main() {
     glfwOpenWindowHint( GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE );
 
     glfwOpenWindowHint( GLFW_WINDOW_NO_RESIZE, GL_TRUE );
-    glfwOpenWindow( 800, 600, 0, 0, 0, 0, 0, 0, GLFW_WINDOW );
+    glfwOpenWindow( 800, 600, 8, 8, 8, 8, 24, 0, GLFW_WINDOW );
 
     glfwSetWindowTitle( "OpenGL play" );
 
@@ -30,7 +31,7 @@ int main() {
     glGetError();
 
     Engine::Timer timer;
-    IntroScene introScene(timer, 0, 8);
+    IntroScene introScene(timer, 0, 30);
 
     try {
       introScene.init();
@@ -38,13 +39,20 @@ int main() {
       std::cout << ex << std::endl;
     }
 
+    // Engine::Collada collada("./resources/box.dae");
+
+    // return 0;
+
     while(glfwGetWindowParam(GLFW_OPENED)) {
         if (glfwGetKey(GLFW_KEY_ESC) == GLFW_PRESS) {
             break;
         }
 
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glEnable(GL_DEPTH_TEST);
+        glDepthFunc(GL_LESS);
 
         unsigned int lapsedSec = timer.getLapsedSec();
         if (lapsedSec >= introScene.getStartTime() &&

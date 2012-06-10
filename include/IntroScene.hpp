@@ -12,18 +12,18 @@
 
 class IntroScene: public Engine::Scene {
 public:
-  IntroScene(Engine::Timer &timer, unsigned int startTime, unsigned int endTime)
-    : Scene(timer, startTime, endTime) {}
-  void init();
-  void update();
-  void draw();
+    IntroScene(Engine::Timer &timer, unsigned int startTime, unsigned int endTime)
+        : Scene(timer, startTime, endTime) {}
+    void init();
+    void update();
+    void draw();
 
 private:
-  GLuint shaderProgram;
-  glm::mat4 Model;
-  glm::mat4 View;
-  glm::mat4 Projection;
-  
+    GLuint shaderProgram;
+    glm::mat4 Model;
+    glm::mat4 View;
+    glm::mat4 Projection;
+    glm::mat4 MVP;
 };
 
 #endif
